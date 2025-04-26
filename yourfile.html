@@ -1,0 +1,558 @@
+<h1 id="table-of-contents">Table of Contents</h1>
+<ol type="1">
+<li><a href="#introduction">Introduction</a><br />
+</li>
+<li><a href="#what-is-simpleticket">What is SimpleTicket?</a><br />
+</li>
+<li><a href="#user-interfaces">User Interfaces</a>
+<ul>
+<li><a href="#side-navigator">Side Navigator</a><br />
+</li>
+<li><a href="#record-list">Record List</a><br />
+</li>
+<li><a href="#form">Form</a><br />
+</li>
+</ul></li>
+<li><a href="#views">Views</a><br />
+</li>
+<li><a href="#view-rules-and-user-preference">View rules &amp; User
+preferences</a>
+<ul>
+<li><a href="#side-navigator">Logic gates</a><br />
+</li>
+<li><a href="#view-rule-configuration">View rule configuration</a><br />
+</li>
+</ul></li>
+<li><a href="#columns">Columns</a></li>
+<li><a href="#buttons">Buttons</a>
+<ul>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#server-side">Server side</a><br />
+</li>
+<li><a href="#client-side">Client side</a><br />
+</li>
+</ul></li>
+<li><a href="#client-side-script">Client side script</a></li>
+<li><a href="#server-side-script">Server side script</a></li>
+<li><a href="#side-navigatior-config">Side navigator</a><br />
+</li>
+<li><a href="#security">Security</a><br />
+</li>
+<li><a href="#notification">Notifications</a></li>
+</ol>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>Welcome to the SimpleTicket Developer Manual. This guide is designed
+for new and experienced developers alike to help understand, build, and
+optimize applications on the SimpleTicket platform.</p>
+</blockquote>
+<hr />
+<h2 id="what-is-simpleticket">What is SimpleTicket?</h2>
+<blockquote>
+<p>SimpleTicket is a cloud-based platform offering digital workflows
+that create great experiences and unlock productivity. It’s widely used
+for Sales Management, IT Operations, HR, Security, and Customer Service
+workflows.</p>
+</blockquote>
+<blockquote>
+<p>SimpleTicket is built on a multi-instance architecture and uses a
+single-tenant model for security and isolation.<br />
+Everything in SimpleTicket is stored in tables. A
+<strong>record</strong> is a row in a table, and a
+<strong>field</strong> is a column.</p>
+</blockquote>
+<hr />
+<h2 id="user-interfaces">User interfaces</h2>
+<h3 id="side-navigator">Side navigator</h3>
+<blockquote>
+<p><img src="https://i.imgur.com/6rqLxPw.png" alt="SimpleTicket UI" /> -
+<strong>Display/hide submenu</strong>: Toggles visibility of user logic
+such as user profile or logout. If you are an admin, you will see the
+dev menu that contains the current scope and the saved configuration
+bucket where changes will be saved. (More on these topics later) -
+<strong>Hide/display navigator</strong>: Toggles the side navigator
+visibility.</p>
+</blockquote>
+<hr />
+<h3 id="record-list">Record list</h3>
+<p><img src="https://i.imgur.com/7G8FNIJ.png" alt="SimpleTicket UI" /> -
+<strong>Display/hide filter</strong>: Toggles visibility of the filter
+panel. - <strong>Filter</strong>: Allows the user to input search
+parameters. - <strong>Configure columns</strong>: Controls the column
+order.<br />
+&gt; <img src="https://i.imgur.com/8YnTbVy.png" alt="SimpleTicket UI" />
+- <strong>Update user preference</strong>: Controls the column order for
+the currently logged-in user.<br />
+- <strong>Update view</strong>: Controls the column order for the view.
+- <strong>Search box</strong>: Used to search through the modules and
+applications available to the user. - <strong>Menu application</strong>:
+Container for modules. - <strong>Menu module</strong>: Contains
+navigation functionality to list/form/board. - <strong>Button
+bar</strong>: Displays buttons/actions the user can perform. -
+<strong>Column search</strong>: Entering search criteria creates an AND
+condition in the filter. - <strong>Column sort toggle</strong>: Clicking
+a column header sorts data by that column. &gt; <img
+src="https://i.imgur.com/dEVAeDf.png" alt="SimpleTicket UI" /> -
+<strong>Record count</strong>: Displays the total number of records per
+filter, as well as the current page in relation to the total number of
+records. - <strong>Record preview</strong>: Allows the user to preview
+the record. &gt; <img src="https://i.imgur.com/lsolCPo.png"
+alt="SimpleTicket UI" /> - <strong>Buttons</strong>: Additional buttons
+appear when right-clicking on the button bar, column header, or record.
+All these buttons are configurable. &gt; <img
+src="https://i.imgur.com/CzRGnED.png" alt="SimpleTicket UI" /></p>
+<hr />
+<h3 id="form">Form</h3>
+<blockquote>
+<p><img src="https://i.imgur.com/rKXgZ3V.png" alt="SimpleTicket UI" /> -
+<strong>Button bar</strong>: Displays buttons/actions the user can
+perform. - <strong>Related list</strong>: Contains a list of related
+records. - <strong>Configure columns</strong>: Modify the layout of the
+form.</p>
+</blockquote>
+<pre><code>&gt; ![SimpleTicket UI](https://i.imgur.com/hk6BYro.png)
+- **View**: Select the view to configure.  
+- **Number of columns**: Controls whether the section has 1 or 2 columns.  
+- **Section name**: The name of the section.  
+- **Selected columns**: Columns currently displayed in the section.  
+- **Available columns**: Columns available to be added to the section.
+- **Configure attachments**
+    &gt; ![SimpleTicket UI](https://i.imgur.com/QAPTPlW.png)    
+    - **Download attachment**: Download attachment.  
+    - **Remove attachment**: Remove attachment.  
+    - **Add attachment**: Add attachment.</code></pre>
+<h3 id="board">Board</h3>
+<h2 id="add-this">ADD THIS</h2>
+<h2 id="views">Views</h2>
+<blockquote>
+<p>Views define how form and list layouts are presented, controlling the
+order and visibility of fields and columns. This is how
+views/sections/columns/related-lists relate <img
+src="https://i.imgur.com/vvQdkUD.png" alt="SimpleTicket UI" /></p>
+</blockquote>
+<hr />
+<h2 id="view-rules-user-preferences">View rules &amp; User
+preferences</h2>
+<h3 id="logic-gates">Logic gates</h3>
+<blockquote>
+<p>Used to control which form view a user sees when they view a record
+list or open a record. The logic for which rule to apply is described in
+the diagram below <img src="https://i.imgur.com/UMyDOtE.png"
+alt="SimpleTicket UI" /> ### View rule configuration - If sys_type =
+‘simple’, and the sys_filter condition evaluates to true or is null,
+then the view in sys_view_name is used. - If sys_type = ‘script’, and
+the script is evaluated and whatever string it returns is the view name
+used. <img src="https://i.imgur.com/7abGJFF.png"
+alt="SimpleTicket UI" /></p>
+</blockquote>
+<hr />
+<h2 id="columns">Columns</h2>
+<ul>
+<li><p><strong>access_control_table_column</strong>: Used for setting
+access controls. &gt; <img src="https://i.imgur.com/bFF6RmK.png"
+alt="SimpleTicket UI" /></p>
+<ul>
+<li><strong>Table</strong>: Used to pick any table (including
+virtual)</li>
+<li><strong>Restriction</strong>: Used to pick a element(s) to set the
+access control against. it possible choices are *, all, or a specific
+column.
+<ul>
+<li>if * is selected, the access control is applied at a record
+level.</li>
+<li>if all is selected, the access control is applied at a table
+level.</li>
+<li>if a column is selected, the access controls is applied at a column
+level.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>any_record</strong>: Used to pick any record from any
+table &gt; <img src="https://i.imgur.com/eFAzu64.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>boolean</strong>: True or false &gt; <img
+src="https://i.imgur.com/VQpJZOs.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>date_year_month_day</strong>: Allows the user to select a
+year-month-day. &gt; <img src="https://i.imgur.com/yniEGqo.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>date_year_month_day_hour_minute</strong>: Allows the user
+to select a year-month-day-hour-minute. &gt; <img
+src="https://i.imgur.com/rcK80yj.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>date_year_month_day_hour_minute_second</strong>: Allows
+the user to select a year-month-day-hour-minute-second. &gt; <img
+src="https://i.imgur.com/6RrrL6O.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>dropdown</strong>: Allows the user to select a choice
+from the dropdown. &gt; <img src="https://i.imgur.com/fycizFk.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>float</strong>: Allows the user to input numbers with
+decimals. &gt; <img src="https://i.imgur.com/7kQdEon.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>image</strong>: Allows the user to input a image to
+display. &gt; <img src="https://i.imgur.com/KE3atkj.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>int</strong>: Allows the user to input whole numbers.
+&gt; <img src="https://i.imgur.com/59bSF85.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>json</strong>: Allows the user to save jsons.</p></li>
+<li><p><strong>long_blob</strong>: Allows the user to store
+attachments.</p></li>
+<li><p><strong>long_text</strong>: Allows the user to store long texts.
+&gt; <img src="https://i.imgur.com/sAT4Llz.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>reference</strong>: Allows the user to select a record
+from a table. &gt; <img src="https://i.imgur.com/eFAzu64.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>reference_list</strong>: Allows the user to select
+multiple records from a table. &gt; <img
+src="https://i.imgur.com/MgtF0Y2.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>rich_text</strong>: Allows the user to create rich
+notifications with html/css. &gt; <img
+src="https://i.imgur.com/uD4l8uL.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>script</strong>: Allows the user to script. &gt; <img
+src="https://i.imgur.com/BAxIWCD.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>table</strong>: Allows the user to pick any table
+(including virtual) in the instance. &gt; <img
+src="https://i.imgur.com/bQN1v1t.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>table_filter</strong>: Allows the user to create filters
+for sql record list query. &gt; <img
+src="https://i.imgur.com/AidPREX.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>text</strong>: Allows the user to input text &gt; <img
+src="https://i.imgur.com/F04oQPB.png" alt="SimpleTicket UI" /></p></li>
+<li><p><strong>time_day_hour_minute</strong>: Allows the user to input a
+day( 1 through 31), hour (1 through 24), minute ( 1 through 60) &gt;
+<img src="https://i.imgur.com/UsGlyOh.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>time_day_hour_minute_second</strong>: Allows the user to
+input a day( 1 through 31), hour (1 through 24), minute ( 1 through 60),
+second (1 through 60) &gt; <img src="https://i.imgur.com/v7A4j3m.png"
+alt="SimpleTicket UI" /></p></li>
+<li><p><strong>time_hour_minute</strong>: Allows the user to input a
+hour (1 through 24), minute ( 1 through 60) &gt; <img
+src="https://i.imgur.com/lrDLU9I.png" alt="SimpleTicket UI" /></p></li>
+</ul>
+<h2 id="buttons">Buttons</h2>
+<blockquote>
+<p>Buttons are the tool we use to drive actions in the platform. We can
+describe the button with three high level domains, its properties,
+location, and script. ### Properties <img
+src="https://i.imgur.com/vF2hnlS.png" alt="SimpleTicket UI" /> -
+<strong>Button name[sys_button_name]</strong>: Button identifier that
+can be used to call its script. - <strong>Name[sys_name]</strong>: Name
+of the button displayed in the UI. - <strong>Type[sys_type]</strong>:
+Describes button apperance. - <strong>Condition[sys_condition]</strong>:
+Script that determines whether to display button. -
+<strong>Active[sys_active]</strong>: Determines whether to display
+button. - <strong>Order[sys_order]</strong>: Determines the buttons
+position in respect to others. - <strong>Table[sys_table]</strong>:
+Determines which table the button will be displayed in. -
+<strong>Server[sys_server]</strong>: Determines if the button runs on
+the client or server side ### Location <img
+src="https://i.imgur.com/3yz2F9W.png" alt="SimpleTicket UI" /> -
+<strong>Child menu[sys_child_menu_name]</strong>: Determines the parent
+button if any. this only works with form menu or list menu. -
+<strong>Form button[sys_form_button]</strong>: Determines if the button
+is displayed in the forms button bar. - <strong>Form
+menu[sys_form_menu]</strong>: Determines if the button is displayed in
+the forms button bar menu when the user right clicks on it. -
+<strong>Table row[sys_form_menu]</strong>: Determines if the button is
+displayed when the user right clicks on a record on a record list. -
+<strong>List button[sys_list_button]</strong>:Determines if the button
+is displayed in the record list button bar. - <strong>Table column
+header[sys_list_column_header_menu]</strong>: Determines if the button
+is displayed when the user right clicks on a records list column header.
+- <strong>List menu[sys_list_menu]</strong>: Determines if the button is
+displayed in the list button bar menu when the user right clicks on it.
+- <strong>Show on insert[sys_show_on_insert]</strong>: Determines if the
+button is displayed when the record is new in a form. - <strong>Show on
+update[sys_show_on_update]</strong>: Determines if the button is
+displayed when the record is not new in a form. ### Script <img
+src="https://i.imgur.com/5QcqvW4.png" alt="SimpleTicket UI" /> -
+<strong>Script[sys_script]</strong>: Contains the set of instructions to
+run when the user clicks the button - <strong>Server load
+script[sys_server_load_script]</strong>: Contains the set of
+instructions to run when when form is loading on the server. mainly used
+to get the views. ### Server side Server side buttons run on the server
+side. They can access server side objects. Server side buttons can
+navigate using the nav object.</p>
+</blockquote>
+<pre><code>// ex 1: refresh page:
+s.print( &#39;hello world&#39; );
+nav[&#39;refresh&#39;] = true;
+
+// ex 2: create a record and navigate to its form to edit it
+var created_record = await c.create();
+  nav[&#39;navIn&#39;]={
+    &#39;table_name&#39;: created_record[&#39;sys_table_name&#39;],
+    &#39;form_params&#39;: {
+      &#39;sys_id&#39;: created_record[&#39;sys_id&#39;]
+     },
+   };
+
+// ex 3: open user list with filter sys_active = true and sys_created_by = juan OR sys_active = true.
+
+nav[&#39;navIn&#39;] = {
+  &#39;ui_type&#39;: &#39;list&#39;,
+  &#39;table_name&#39;: &#39;sys_user&#39;,
+  &#39;list_filter&#39;: [
+    [
+      {
+        &quot;&quot;sys_column&quot;&quot;: &quot;&quot;sys_active&quot;&quot;,
+        &quot;&quot;sys_operator&quot;&quot;: &quot;&quot;=&quot;&quot;,
+        &quot;&quot;sys_value&quot;&quot;: true
+      },
+      {
+        &quot;&quot;sys_column&quot;&quot;: &quot;&quot;sys_created_by&quot;&quot;,
+        &quot;&quot;sys_operator&quot;&quot;: &quot;&quot;=&quot;&quot;,
+        &quot;&quot;sys_value&quot;&quot;: &#39;juan&#39;
+      }
+    ],
+    [
+      {
+        &quot;&quot;sys_column&quot;&quot;: &quot;&quot;sys_active&quot;&quot;,
+        &quot;&quot;sys_operator&quot;&quot;: &quot;&quot;=&quot;&quot;,
+        &quot;&quot;sys_value&quot;&quot;: false
+      }
+
+    ],
+
+  ]
+};
+
+
+ex 4:open facebook in a new tab.
+
+nav[&#39;navOut&#39;] = &#39;www.facebook.com&#39;
+
+</code></pre>
+<h3 id="client-side">Client side</h3>
+<blockquote>
+<p>Client side buttons can on the server and client side or just the
+client side. Client side buttons can navigate UrlData.</p>
+</blockquote>
+<pre><code>// ex: open a form with pre filled values ( sys_active = true ) . To open a new record sys_id = new must be present.
+const urlData = new UrlData({
+    ui_type: &#39;form&#39;,
+    portal_name: &#39;back&#39;,
+    table_name: &#39;sys_user&#39;,
+    view: &#39;default_sys_user&#39;,
+    form_params: { &#39;sys_id&#39;:&#39;new&#39;,  &#39;sys_active&#39;:true }
+});
+urlData.setUrl();
+
+
+// ex: open list with a filter ( sys_active = true AND sys_first_name != &#39;Tom brady&#39; );
+const urlData = new UrlData({
+    ui_type: &#39;list&#39;,
+    portal_name: &#39;back&#39;,
+    table_name: &#39;sys_user&#39;,
+    view: &#39;default_sys_user&#39;,
+    list_filter: [
+        [{ sys_column: &#39;sys_active&#39;, sys_operator: &#39;=&#39;, sys_value: &#39;active&#39; }],
+        [{ sys_column: &#39;sys_first_name&#39;, sys_operator: &#39;!=&#39;, sys_value:&#39;Tom brady&#39; }]
+    ]
+});
+urlData.setUrl();</code></pre>
+<hr />
+<h2 id="client-side-script">Client side script</h2>
+<hr />
+<h2 id="server-side-script">Server side script</h2>
+<hr />
+<h2 id="side-navigator-1">Side navigator</h2>
+<blockquote>
+<p>To navigate the app using the side navigator, create a
+sys_menu_module record. <img src="https://i.imgur.com/r6oNd5t.png"
+alt="SimpleTicket UI" /> - <strong>Link type[sys_link_type]</strong>:
+Determines the UI to load. - Form: A form can be opened to a new record,
+or to a existing record. we can also pass params throught the url to set
+as initial values. - How to open to a new record: - in sys_filter, pass
+sys_id is new - How to open to a existing record: - in sys_filter, pass
+sys_id is xxx - How to pass initializing params: - in sys_filter, pass
+the params - Record list: A record list can be openend with a filter -
+Board:A board can be openend. Set the table as sys_board and in the
+sys_filter pass the sys_id of the record to point to.</p>
+</blockquote>
+<ul>
+<li><strong>Arguments[sys_arguments]</strong>: Contains additional
+parameters we can pass such as order by to a record list</li>
+<li><strong>Table[sys_table_id1]</strong>: Determines which table is
+being used to load record/records.</li>
+<li><strong>Table filter[sys_filter]</strong>:
+<ul>
+<li>In a record list, it determines which records to display.</li>
+<li>In a form, it is used to pass parameters.</li>
+<li>In a board, only the sys_id is passed to know which board to
+open.</li>
+</ul></li>
+<li><strong>View name[sys_view_name]</strong>:
+<ul>
+<li>In a record list, it determines which view to use.</li>
+<li>In a form, it determines which view to use.</li>
+</ul></li>
+<li><strong>Title[sys_tile]</strong>: Determines the title of the module
+in the side navigator.</li>
+<li><strong>Menu id[sys_menu_category_id]</strong>: Determines which
+menu category to be under.</li>
+<li><strong>Order[sys_order]</strong>: Determines its position within
+the menu category.</li>
+<li><strong>Roles[sys_roles]</strong>: Determines the roles required to
+see the module.</li>
+</ul>
+<hr />
+<h2 id="security">Security</h2>
+<blockquote>
+<figure>
+<img src="https://i.imgur.com/XstdrIT.png" alt="SimpleTicket UI" />
+<figcaption aria-hidden="true">SimpleTicket UI</figcaption>
+</figure>
+</blockquote>
+<ul>
+<li><strong>Group</strong>: Defines which user groups have visibility or
+access to the record or module.</li>
+<li><strong>Role</strong>: Specifies the roles required to access or
+interact with the record.</li>
+<li><strong>Access controls</strong>: Implemented via Access Control
+Rules (ACLs) on the table or field level to restrict CRUD (Create, Read,
+Update, Delete) operations. These rules evaluate conditions, scripts, or
+roles to grant or deny access. &gt; <img
+src="https://i.imgur.com/9ptJ56u.png" alt="SimpleTicket UI" />
+<ul>
+<li><strong>Type [sys_type]</strong>: Determines when the access control
+is applicable.</li>
+<li><strong>Operation [sys_operation]</strong>: Determines whether
+create/read/update/delete is the action required for the ACL to be
+applicable.</li>
+<li><strong>Table column [sys_table_column_pair]</strong>: Determines
+the table and restriction that the ACL applies to. See
+<code>access_control_table_column</code> column for more detail.</li>
+<li><strong>Table filter [sys_table_filter]</strong>: A filter used to
+allow the user more granularity for applying the ACL.</li>
+<li><strong>Script [sys_script]</strong>: Instructions that determine if
+the user is allowed access to the record or not. To allow access set
+<code>result = true</code>, to deny set
+<code>result = false</code>.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="notification">Notification</h2>
+<blockquote>
+<figure>
+<img src="https://i.imgur.com/XstdrIT.png" alt="SimpleTicket UI" />
+<figcaption aria-hidden="true">SimpleTicket UI</figcaption>
+</figure>
+</blockquote>
+<ul>
+<li><strong>Attachment 1</strong>: Description of attachment 1.</li>
+<li><strong>Attachment 2</strong>: Description of attachment 2.</li>
+</ul>
+<hr />
+<h1 id="simpleticket-overview">SimpleTicket Overview</h1>
+<h2 id="system-properties">System properties</h2>
+<blockquote>
+<p>System properties are configurable values that control the behavior
+and settings of the SimpleTicket platform. They allow administrators to
+modify features without altering code.</p>
+</blockquote>
+<hr />
+<h2 id="schedule-jobs">Schedule jobs</h2>
+<blockquote>
+<p>Scheduled jobs automate background tasks and processes, such as
+running scripts or importing data, at defined times or intervals. <img
+src="https://i.imgur.com/iupM7sh.png" alt="SimpleTicket UI" /> -
+<strong>Condition[sys_condition]</strong>: Dictates whether the script
+runs or not, runs server side. - <strong>Script[sys_script]</strong>:
+Set of instructions to run. <img src="https://i.imgur.com/v4j0wqG.png"
+alt="SimpleTicket UI" /> There are 5 types of schedule jobs. here are
+their configurations: - <strong>Weekly</strong>: Job runs once a week on
+the given Day of the week [sys_day_of_week]. it also takes in starting
+date[sys_starting]. - <strong>Daily</strong>: Job runs daily at the
+given Time [sys_time] in a 24/7 format. - <strong>Monthly</strong>: Job
+runs once a month on the given Day of the month [sys_day_of_month]. it
+also takes in starting date[sys_starting]. - <strong>Yearly</strong>:
+Job runs once a year on the given Day of the year [sys_day_of_year]. it
+also takes in starting date[sys_starting]. - <strong>Once</strong>: Job
+runs once a on the given One time [sys_one_time].</p>
+</blockquote>
+<hr />
+<h2 id="config-config-entry">Config &amp; Config entry</h2>
+<blockquote>
+<p>SimpleTicket mechanism for storing changes dev changes is quite
+simple. Each table has a sys_track_changes flag, if the flag is set to
+true and a crud operation occurs, then the change is saved. Config
+[sys_saved_configuration] is the table that stores where the change
+record is stored. Config entry [sys_config_entry] is the record that
+stores the actual change</p>
+</blockquote>
+<hr />
+<h2 id="import-config-its-entries">Import config &amp; its entries</h2>
+<blockquote>
+<p>Import config is used when you want to import data from another
+SimpleTicket instance into yours without triggering acls/server rules
+and without writing the record system properties such as sys_created_by.
+Import configs [sys_imported_saved_configuration] can be though of as a
+container for keeping changes, Import config entries
+[sys_imported_saved_configuration_data] is the record that contains the
+actual change.</p>
+</blockquote>
+<hr />
+<h2 id="reports">Reports</h2>
+<blockquote>
+<p>Reports allow users to visualize, analyze, and share data using
+various chart types, lists, and dashboards for informed decision-making.
+If you click in a reports section, it will open a new widown with record
+list of the given table with the filter <img
+src="https://i.imgur.com/UQ21rwc.png" alt="SimpleTicket UI" /> -
+<strong>Report UI editor</strong>: Button that opens up report creator
+UI <img src="https://i.imgur.com/WFdAaYG.png" alt="SimpleTicket UI" /> -
+<strong>Name [sys_title]</strong>: The title of the report. -
+<strong>Data input type [sys_input_data_type]</strong>: The table to run
+the report against. - <strong>Table [sys_table_id1]</strong>: The table
+to run the report against - <strong>Group by
+[sys_selected_group_by_column]</strong>: The column displayed in the
+report. It allows dot walking if the column is of reference type -
+<strong>Data display type [sys_data_display_type]</strong>: The report
+style (dount/donut/line) - <strong>Time count [sys_time_unit]</strong>:
+The time unit for the x axis in a line report. - <strong>Query operation
+[sys_query_operation]</strong>: Determines the method for counting the
+datas in the report.</p>
+</blockquote>
+<hr />
+<h2 id="report-board">Report Board</h2>
+<blockquote>
+<p>Report boards provide a centralized visual display of key metrics,
+reports, and performance indicators, helping users and teams monitor
+activity and make data-driven decisions. To create a report board the
+the type to report, add a name, and click ‘Create’. <img
+src="https://i.imgur.com/l1BbiNO.png" alt="SimpleTicket UI" /> To open
+the Report board UI click on the Board UI editor as shown below. To open
+the board, click on ‘View board’. <img
+src="https://i.imgur.com/VCKpM6O.png" alt="SimpleTicket UI" /></p>
+</blockquote>
+<blockquote>
+<p><img src="https://i.imgur.com/JBWSvvP.png" alt="SimpleTicket UI" /> -
+<strong>Report picker</strong>: Drag and drop of available reports -
+<strong>Section title</strong>: The title of the section. -
+<strong>Report picker</strong>: The title of the board. - <strong>Remove
+report</strong>: Remove the report. - <strong>Add section</strong>: Add
+a section.</p>
+</blockquote>
+<p>Below is shows how a board would look like &gt; <img
+src="https://i.imgur.com/YVd6ROM.png" alt="SimpleTicket UI" /></p>
+<hr />
+<h2 id="virtual-viewtable">Virtual view/table</h2>
+<blockquote>
+<p>Virtual views (<code>sys_virtual_view</code>) allow you to join
+tables virtually, without creating new tables or duplicating data. They
+are useful when you need to report on or query data across multiple
+related tables. Each virtual view has virtual tables
+(<code>sys_virtual_table</code>) that determine the tables and join
+style. <img src="https://i.imgur.com/FSF2om2.png"
+alt="SimpleTicket UI" /> - <strong>Name [sys_name]</strong>: The title
+of the view. - <strong>Label [sys_label]</strong>: The name shown in the
+view. - <strong>Order [sys_order]</strong>: The table’s position in the
+join query. - <strong>Where clause [sys_where_clause]</strong>: The
+alias of the table in the join query. - <strong>Table alias
+[sys_table_alias]</strong>: The table’s alias in the join. -
+<strong>Virtual table view [sys_virtual_table_view_id]</strong>: Links
+to the virtual view.</p>
+</blockquote>
+<hr />

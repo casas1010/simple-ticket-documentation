@@ -43,7 +43,7 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
 
 ### Side navigator
 
->![SimpleTicket UI](https://i.imgur.com/6rqLxPw.png)
+> ![SimpleTicket UI](https://i.imgur.com/6rqLxPw.png)
 - **Display/hide submenu**: Toggles visibility of user logic such as user profile or logout. If you are an admin, you will see the dev menu that contains the current scope and the saved configuration bucket where changes will be saved. (More on these topics later)
 - **Hide/display navigator**: Toggles the side navigator visibility.
 
@@ -51,7 +51,7 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
 
 ### Record list
 
-![SimpleTicket UI](https://i.imgur.com/7G8FNIJ.png)
+> ![SimpleTicket UI](https://i.imgur.com/7G8FNIJ.png)
 - **Display/hide filter**: Toggles visibility of the filter panel.
 - **Filter**: Allows the user to input search parameters.
 - **Configure columns**: Controls the column order.  
@@ -323,6 +323,7 @@ urlData.setUrl();
 - **Roles[sys_roles]**: Determines the roles required to see the module.
 
 ---
+
 ## Security
 > ![SimpleTicket UI](https://i.imgur.com/XstdrIT.png)
 
@@ -346,7 +347,7 @@ urlData.setUrl();
 
 ---
 
-# SimpleTicket Overview
+
 
 ## System properties
 > System properties are configurable values that control the behavior and settings of the SimpleTicket platform. They allow administrators to modify features without altering code.
@@ -354,12 +355,18 @@ urlData.setUrl();
 ---
 
 ## Schedule jobs
-> Scheduled jobs automate background tasks and processes, such as running scripts or importing data, at defined times or intervals.
+> Scheduled jobs automate background tasks and processes, such as running scripts or importing data, at defined times or intervals. 
+> ![SimpleTicket UI](https://i.imgur.com/iupM7sh.png)
+- **Condition[sys_condition]**: Dictates whether the script runs or not, runs server side.
+- **Script[sys_script]**: Set of instructions to run.
+> ![SimpleTicket UI](https://i.imgur.com/v4j0wqG.png)
+There are 5 types of schedule jobs. here are their configurations:
+- **Weekly**: Job runs once a week on the given Day of the week [sys_day_of_week]. it also takes in starting date[sys_starting].
+- **Daily**: Job runs daily at the given Time [sys_time] in a 24/7 format.
+- **Monthly**: Job runs once a month on the given Day of the month [sys_day_of_month]. it also takes in starting date[sys_starting].
+- **Yearly**: Job runs once a year on the given Day of the year [sys_day_of_year]. it also takes in starting date[sys_starting].
+- **Once**: Job runs once a on the given One time [sys_one_time].
 
----
-
-## Logger
-> The logger (or logging) system tracks platform events, errors, and debugging information to help developers and administrators monitor system activity and troubleshoot issues.
 
 ---
 
@@ -394,7 +401,19 @@ urlData.setUrl();
 > Report boards provide a centralized visual display of key metrics, reports, and performance indicators, helping users and teams monitor activity and make data-driven decisions. To create a report board the the type to report, add a name, and click 'Create'.
 > ![SimpleTicket UI](https://i.imgur.com/l1BbiNO.png)
 > To open the Report board UI click on the Board UI editor as shown below.
+> To open the board, click on 'View board'.
+> ![SimpleTicket UI](https://i.imgur.com/VCKpM6O.png)
+
+> ![SimpleTicket UI](https://i.imgur.com/JBWSvvP.png)
+- **Report picker**: Drag and drop  of available reports
+- **Section title**: The title of the section.
+- **Report picker**: The title of the board.
+- **Remove report**: Remove the report.
+- **Add section**: Add a section.
+
+Below is shows how a board would look like
 > ![SimpleTicket UI](https://i.imgur.com/YVd6ROM.png)
+
 
 
 
