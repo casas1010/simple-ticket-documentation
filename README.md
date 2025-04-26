@@ -1,4 +1,5 @@
-# SimpleTicket Developer Manual - Table of Contents
+
+# Table of Contents
 
 1. [Introduction](#introduction)  
 2. [What is SimpleTicket?](#what-is-simpleticket)  
@@ -12,6 +13,7 @@
    - [View rule configuration](#view-rule-configuration)  
 6. [Columns](#columns)
 7. [Buttons](#buttons)
+   - [Properties](#properties)
    - [Server side](#server-side)  
    - [Client side](#client-side)  
 8. [Client side script](#client-side-script)
@@ -37,20 +39,20 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
 
 ---
 
-## User Interfaces
+## User interfaces
 
-### Side Navigator
+### Side navigator
 
 >![SimpleTicket UI](https://i.imgur.com/6rqLxPw.png)
-- **Display/Hide submenu**: Toggles visibility of user logic such as user profile or logout. If you are an admin, you will see the dev menu that contains the current scope and the saved configuration bucket where changes will be saved. (More on these topics later)
-- **Hide/Display navigator**: Toggles the side navigator visibility.
+- **Display/hide submenu**: Toggles visibility of user logic such as user profile or logout. If you are an admin, you will see the dev menu that contains the current scope and the saved configuration bucket where changes will be saved. (More on these topics later)
+- **Hide/display navigator**: Toggles the side navigator visibility.
 
 ---
 
-### Record List
+### Record list
 
 ![SimpleTicket UI](https://i.imgur.com/7G8FNIJ.png)
-- **Display/Hide filter**: Toggles visibility of the filter panel.
+- **Display/hide filter**: Toggles visibility of the filter panel.
 - **Filter**: Allows the user to input search parameters.
 - **Configure columns**: Controls the column order.  
     > ![SimpleTicket UI](https://i.imgur.com/8YnTbVy.png)
@@ -71,7 +73,7 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
 
 ---
 
-### Form View
+### Form view
 > ![SimpleTicket UI](https://i.imgur.com/rKXgZ3V.png)
 - **Button bar**: Displays buttons/actions the user can perform.
 - **Related list**: Contains a list of related records.
@@ -191,4 +193,61 @@ This is how views/sections/columns/related-lists relate
 > ![SimpleTicket UI](https://i.imgur.com/5QcqvW4.png)
 - **Script[sys_script]**: Contains the set of instructions to run when the user clicks the button
 - **Server load script[sys_server_load_script]**: Contains the set of instructions to run when when form is loading on the server. mainly used to get the views.
-# simple-ticket-documentation
+### Server side
+> Server side buttons run on the server side. They can access server side objects.
+> Server side buttons can navigate using the nav object. 
+```
+// ex 1: refresh page:
+s.print( 'hello world' );
+nav['refresh'] = true;
+
+// ex 2: create a record and navigate to its form to edit it
+var created_record = await c.create();
+  nav['navIn']={
+    'table_name': created_record['sys_table_name'],
+    'form_params': {
+      'sys_id': created_record['sys_id']
+     },
+   };
+
+// ex 3: open user list with filter sys_active = true and sys_created_by = juan OR sys_active = true.
+
+nav['navIn'] = {
+  'ui_type': 'list',
+  'table_name': 'sys_user',
+  'list_filter': [
+    [
+      {
+        ""sys_column"": ""sys_active"",
+        ""sys_operator"": ""="",
+        ""sys_value"": true
+      },
+      {
+        ""sys_column"": ""sys_created_by"",
+        ""sys_operator"": ""="",
+        ""sys_value"": 'juan'
+      }
+    ],
+    [
+      {
+        ""sys_column"": ""sys_active"",
+        ""sys_operator"": ""="",
+        ""sys_value"": false
+      }
+
+    ],
+
+  ]
+};
+
+
+ex 4:open facebook in a new tab.
+
+nav['navOut'] = 'www.facebook.com'
+
+
+```
+### Client side
+> Client side buttons can on the server and client side or just the client side. 
+
+
