@@ -6,22 +6,33 @@
 3. [User Interfaces](#user-interfaces)  
    - [Side Navigator](#side-navigator)  
    - [Record List](#record-list)  
-   - [Form](#form)  
+   - [Form](#form)
 4. [Views](#views)  
-5. [View rules & User preferences](#view-rules-and-user-preference)  
-   - [Logic gates](#side-navigator)  
+5. [View rules & User preferences](#view-rules--user-preferences)  
+   - [Logic gates](#logic-gates)  
    - [View rule configuration](#view-rule-configuration)  
 6. [Columns](#columns)
 7. [Buttons](#buttons)
    - [Properties](#properties)
+   - [Location](#location)
+   - [Script](#script)
    - [Server side](#server-side)  
    - [Client side](#client-side)  
-8. [Client side script](#client-side-script)
-9. [Server side script](#server-side-script)
-10. [Side navigator](#side-navigatior-config)  
-11. [Security](#security)  
-12. [Notifications](#notification)  
-
+8. [Client script](#client-script-sys_client_script)
+9. [Client side APIs](#client-side-apis)
+10. [Server rules](#server-rules-sys_server_rule)
+11. [Server script](#server-script-sys_server_script)
+12. [Server side APIs](#server-side-apis)
+13. [Side navigator](#side-navigator-1)
+14. [Security](#security)  
+15. [Notifications](#notifications)
+16. [System properties](#system-properties)
+17. [Schedule jobs](#schedule-jobs)
+18. [Config & Config entry](#config--config-entry)
+19. [Import config & its entries](#import-config--its-entries)
+20. [Reports](#reports)
+21. [Report Board](#report-board)
+22. [Virtual view/table](#virtual-viewtable)
 ---
 
 ## Introduction
@@ -49,27 +60,28 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
 
 ---
 
-### Record list
+### Record List
 
 > ![SimpleTicket UI](https://i.imgur.com/7G8FNIJ.png)
-- **Display/hide filter**: Toggles visibility of the filter panel.
-- **Filter**: Allows the user to input search parameters.
-- **Configure columns**: Controls the column order.  
-    > ![SimpleTicket UI](https://i.imgur.com/8YnTbVy.png)
-  - **Update user preference**: Controls the column order for the currently logged-in user.  
-  - **Update view**: Controls the column order for the view.
-- **Search box**: Used to search through the modules and applications available to the user.
-- **Menu application**: Container for modules.
-- **Menu module**: Contains navigation functionality to list/form/board.
-- **Button bar**: Displays buttons/actions the user can perform.
-- **Column search**: Entering search criteria creates an AND condition in the filter.
-- **Column sort toggle**: Clicking a column header sorts data by that column.
-    > ![SimpleTicket UI](https://i.imgur.com/dEVAeDf.png)
-- **Record count**: Displays the total number of records per filter, as well as the current page in relation to the total number of records.
-- **Record preview**: Allows the user to preview the record.
-    > ![SimpleTicket UI](https://i.imgur.com/lsolCPo.png)
-- **Buttons**: Additional buttons appear when right-clicking on the button bar, column header, or record. All these buttons are configurable.
-    > ![SimpleTicket UI](https://i.imgur.com/CzRGnED.png)
+
+- **Display/Hide Filter**: Toggles the visibility of the filter panel.
+- **Filter**: Allows users to input search parameters.
+- **Configure Columns**: Manages the column order.
+  > ![SimpleTicket UI](https://i.imgur.com/8YnTbVy.png)
+  - **Update User Preferences**: Sets the column order for the currently logged-in user.
+  - **Update View**: Adjusts the column order for the current view.
+- **Search Box**: Enables searching across available modules and applications.
+- **Menu Application**: Contains modules.
+- **Menu Module**: Provides navigation functionality to list, form, or board.
+- **Button Bar**: Displays available actions and buttons for the user.
+- **Column Search**: Inputting search criteria creates an AND condition for filtering.
+- **Column Sort Toggle**: Clicking a column header sorts the data by that column.
+  > ![SimpleTicket UI](https://i.imgur.com/dEVAeDf.png)
+- **Record Count**: Displays the total number of records that match the filter and indicates the current page relative to the total records.
+- **Record Preview**: Allows users to preview a selected record.
+  > ![SimpleTicket UI](https://i.imgur.com/lsolCPo.png)
+- **Additional Buttons**: Right-clicking on the button bar, column header, or a record reveals configurable buttons.
+  > ![SimpleTicket UI](https://i.imgur.com/CzRGnED.png)
 
 ---
 
@@ -91,9 +103,7 @@ Everything in SimpleTicket is stored in tables. A **record** is a row in a table
         - **Add attachment**: Add attachment.
 
 
-### Board  
-ADD THIS      
----
+
 
 ## Views
 > Views define how form and list layouts are presented, controlling the order and visibility of fields and columns.
@@ -282,14 +292,69 @@ urlData.setUrl();
 
 ---
 
+## Client script [sys_client_script]
 
-## Client side script
+Scripts that run in the user's browser, typically to manage form behavior, validate data, or dynamically update fields without a full server call. Common examples include:
+> ![SimpleTicket UI](https://i.imgur.com/VoIS2K9.png)
+- **Name [sys_name]**: Script name
+- **Type [sys_type]**: Determines the table column the script should run.
+    - **On Change**: Runs when a particular field value changes.
+    - **On Load**: Runs when the form loads.
+- **UI Type [sys_type]**: Determines the table column the script should run.
+- **Table id [sys_table_id1]**: Determines the table where the script should run.
+- **Table id [sys_table_id1]**: Determines the column that needs to change in order for the script to run if Type is 'On change'
+- **Script [sys_script]**: Instructions executed.
 
 ---
 
+## Client side APIs
 
-## Server side script
+These scripts enhance user experience by making forms/list interactive and responsive without needing server interaction for every small task.
 
+
+---
+
+## Server rules [sys_server_rule]
+> Scripts that are triggered when a record is inserted, updated, deleted, or queried.
+> ![SimpleTicket UI](https://i.imgur.com/HydYuP3.png)
+- **Order[sys_order]**: The order of the script.
+- **Table[sys_table_id1]**: The order of the script.
+- **Filter[sys_filter]**: The sql where equivalent
+- **When[sys_when]**: The operation that triggers the script.
+- **Read[sys_read]**: Runs when the record is read.
+- **Insert[sys_insert]**: Runs when the record is create.
+- **Delete[sys_delete]**: Runs when the record is deleted.
+- **Condition[sys_condition]**: Condition required to pass in order for the script to run.
+- **Script[sys_script]**: Set of instructions to run. it has access to the current(c) and previous(p) states of the record. Script also has access to s.abort(message), it allows you to stop the execution of the action being taken.
+
+
+
+---
+
+## Server script [sys_server_script]
+> Reusable server-side functions that can be called from other scripts.
+> ![SimpleTicket UI](https://i.imgur.com/o4l1IEP.png)
+- **Class name[sys_class_name]**: The name of the class to use.
+- **Client callable[sys_client_callable]**:The script can be called from the client side.
+- **Class name[sys_class_name]**: The name of the class to use.
+
+> Here is a example of how to call a server script from the client side
+```
+var script_helper = new ServerScriptHelper();
+script_helper.class_name = 'UserPreferenceUtils';          // pass class name
+script_helper.method_name = 'updateUserPreference';        // pass method name
+script_helper.params = {                                   // pass params
+    'sys_name': (l.getTable())['sys_name'] + '.list.view',
+    'sys_value': v_name['sys_name']
+};
+var res = await script_helper.get();
+```
+> To call the script from another server side script just instantiated the class name
+
+
+## Server-Side APIs
+
+These scripts enhance the user experience by providing access to a variety of different classes and functionalities, enabling seamless interactions and streamlined processes.
 ---
 
 
@@ -339,11 +404,20 @@ urlData.setUrl();
 
 ---
 
-## Notification
-> ![SimpleTicket UI](https://i.imgur.com/XstdrIT.png)
-
-- **Attachment 1**: Description of attachment 1.
-- **Attachment 2**: Description of attachment 2.
+## Notifications
+> Notifications allow you to configure automatic emails sent to users or groups based on record changes, events, or conditions.
+> Notifications Body and Subject allow you to grab information from the record that triggered it using ${COLUMN_NAME}. for Example if its a the users table that the notification is against, then the subject can be "Hello ${sys_first_name}" and use the users first name. sys_first_name is a column in the sys_user table.
+> Notifications can carry attachments two different ways, by adding a download link and by adding the attachment itself to the email.
+> ![SimpleTicket UI](https://i.imgur.com/YNI87er.png)
+  - **Name [sys_name]**: The name of the notification
+  - **Subject [sys_subject]**: The subject of the email
+  - **Body [sys_body]**: The body of the email
+  - **Action when to send [sys_when]**: Determines when the action that triggers the email being sent (Create, Update, Create or Update, Event triggered)
+  - **Table [sys_table]**: The table that contains the trigger to send the email. Only applicable if 'Action when to send' is not 'Event triggered'
+  - **Table filter [sys_table_filter]**: A filter to allow more granularity of the record that triggers the notification
+  - **Event [sys_event]**: The event name to listen for when 'Action when to send' is set to 'Event triggered'. This event must match a defined event in the system.
+  - **Groups [sys_groups]**: One or more user groups that should receive the notification. Members of the selected groups will be notified.
+  - **Users [sys_users]**: Individual users who should directly receive the notification.
 
 ---
 
@@ -351,6 +425,11 @@ urlData.setUrl();
 
 ## System properties
 > System properties are configurable values that control the behavior and settings of the SimpleTicket platform. They allow administrators to modify features without altering code.
+> ![SimpleTicket UI](https://i.imgur.com/HmF7Jmf.png)
+- **Name[sys_name]**: Name of the property
+- **Description[sys_description]**: Describes what the property is and used for
+- **Type[sys_type]**: The type of property (String or Number)
+- **Value[sys_value]**: The value of the property
 
 ---
 
